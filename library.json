@@ -1,0 +1,12 @@
+{
+  "id": "{9AC35841-9778-D8E8-31CF-0BDAD3E0C3A7}",
+  "author": "Ulrich Bittner",
+  "name": "Loqed",
+  "url": "https://github.com/ubittner/SymconLoqed",
+  "compatibility": {
+    "version": "6.0"
+  },
+  "version": "1.0",
+  "build": 1,
+  "date": 1645850788
+}

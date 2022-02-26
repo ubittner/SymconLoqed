@@ -1,0 +1,12 @@
+{
+  "id": "{25E5EE32-0C3B-78B1-4B68-03B33878A64C}",
+  "name": "Loqed",
+  "type": 3,
+  "vendor": "Loqed",
+  "aliases": [],
+  "url": "https://github.com/ubittner/SymconLoqed",
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "LOQED"
+}
