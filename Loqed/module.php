@@ -21,8 +21,9 @@ class Loqed extends IPSModule
         $this->RegisterPropertyString('APIKey', '');
         $this->RegisterPropertyString('APIToken', '');
         $this->RegisterPropertyString('LocalKeyID', '');
+        $this->RegisterPropertyString('LockID', '');
 
-        ########## Variable
+        ########## Variables
         //Smart Lock
         $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.SmartLock';
         if (!IPS_VariableProfileExists($profile)) {
@@ -33,6 +34,79 @@ class Loqed extends IPSModule
         IPS_SetVariableProfileAssociation($profile, 2, $this->Translate('Open'), 'Door', 0x0000FF);
         $this->RegisterVariableInteger('SmartLock', 'Smart Lock', $profile, 100);
         $this->EnableAction('SmartLock');
+
+        //Online state: bridge_online (1 if bridge is online, otherwise 0)
+        $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.OnlineState';
+        if (!IPS_VariableProfileExists($profile)) {
+            IPS_CreateVariableProfile($profile, 1);
+        }
+        IPS_SetVariableProfileIcon($profile, '');
+        IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Offline'), 'Warning', 0xFF0000);
+        IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Online'), 'Network', 0x00FF00);
+        $this->RegisterVariableInteger('OnlineState', $this->Translate('Online state'), $profile, 200);
+
+        //Device state: bolt_state_numeric (0 = unknown, 1 = open, 2 = day_lock, 3 = night_lock)
+        $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.DeviceState';
+        if (!IPS_VariableProfileExists($profile)) {
+            IPS_CreateVariableProfile($profile, 1);
+        }
+        IPS_SetVariableProfileIcon($profile, '');
+        IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Unknown'), 'Warning', 0xFF0000);
+        IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Open'), 'Door', 0xFF0000);
+        IPS_SetVariableProfileAssociation($profile, 2, $this->Translate('Unlocked'), 'LockOpen', 0x0000FF);
+        IPS_SetVariableProfileAssociation($profile, 3, $this->Translate('Locked'), 'LockClosed', 0x0000FF);
+        $this->RegisterVariableInteger('DeviceState', $this->Translate('Device state'), $profile, 210);
+
+        //Battery charge: battery_percentage
+        $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.BatteryCharge';
+        if (!IPS_VariableProfileExists($profile)) {
+            IPS_CreateVariableProfile($profile, 1);
+        }
+        IPS_SetVariableProfileValues($profile, 0, 100, 1);
+        IPS_SetVariableProfileText($profile, '', '%');
+        IPS_SetVariableProfileIcon($profile, 'Battery');
+        $this->RegisterVariableInteger('BatteryCharge', $this->Translate('Battery charge'), $profile, 220);
+
+        //Battery type: battery_type (0 = Alkaline, 1 = NiMH, 2 = Lithium (non-rechargable))
+        $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.BatteryType';
+        if (!IPS_VariableProfileExists($profile)) {
+            IPS_CreateVariableProfile($profile, 1);
+        }
+        IPS_SetVariableProfileIcon($profile, 'Battery');
+        IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Alkaline'), '', 0x0000FF);
+        IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('NiMH'), '', 0x0000FF);
+        IPS_SetVariableProfileAssociation($profile, 2, $this->Translate('Lithium (non-rechargable)'), '', 0x0000FF);
+        $this->RegisterVariableInteger('BatteryType', $this->Translate('Battery type'), $profile, 230);
+
+        //Guest access: guest_access_mode (1 if enabled, 0 if disabled)
+        $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.GuestAccess';
+        if (!IPS_VariableProfileExists($profile)) {
+            IPS_CreateVariableProfile($profile, 1);
+        }
+        IPS_SetVariableProfileIcon($profile, 'Motion');
+        IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Disabled'), '', 0x00FF00);
+        IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Enabled'), '', 0xFF0000);
+        $this->RegisterVariableInteger('GuestAccess', $this->Translate('Guest access'), $profile, 240);
+
+        //Twist assist: twist_assist (1 if enabled, 0 if disabled)
+        $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.TwistAssist';
+        if (!IPS_VariableProfileExists($profile)) {
+            IPS_CreateVariableProfile($profile, 1);
+        }
+        IPS_SetVariableProfileIcon($profile, 'Repeat');
+        IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Disabled'), '', 0x00FF00);
+        IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Enabled'), '', 0xFF0000);
+        $this->RegisterVariableInteger('TwistAssist', $this->Translate('Twist assist'), $profile, 250);
+
+        //Touch to connect: touch_to_connect (1 if Touch to Open 500-meter restriction is removed, 0 otherwise)
+        $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.TouchToConnect';
+        if (!IPS_VariableProfileExists($profile)) {
+            IPS_CreateVariableProfile($profile, 1);
+        }
+        IPS_SetVariableProfileIcon($profile, 'Execute');
+        IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Restriction'), '', 0xF00F00);
+        IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Restriction is removed'), '', 0x00FF00);
+        $this->RegisterVariableInteger('TouchToConnect', $this->Translate('Touch to connect'), $profile, 260);
     }
 
     public function Destroy()
@@ -167,6 +241,50 @@ class Loqed extends IPSModule
         return $success;
     }
 
+    public function GetDeviceState(): bool
+    {
+        $apiToken = $this->ReadPropertyString('APIToken');
+        $lockID = $this->ReadPropertyString('LockID');
+        if (empty($apiToken) || empty($lockID)) {
+            $this->SendDebug(__FUNCTION__, 'Please check your configuration!', 0);
+            return false;
+        }
+        $success = false;
+        $endpoint = 'https://app.loqed.com/API/lock_status.php?api_token=' . urlencode($apiToken) . '&lock_id=' . $lockID;
+        $this->SendDebug(__FUNCTION__, 'Endpoint: ' . $endpoint, 0);
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_CUSTOMREQUEST   => 'GET',
+            CURLOPT_URL             => $endpoint,
+            CURLOPT_HEADER          => true,
+            CURLOPT_RETURNTRANSFER  => true,
+            CURLOPT_FAILONERROR     => false,
+            CURLOPT_CONNECTTIMEOUT  => 5,
+            CURLOPT_TIMEOUT         => 60]);
+        $response = curl_exec($curl);
+        $this->SendDebug(__FUNCTION__, 'Response: ' . $response, 0);
+        if (!curl_errno($curl)) {
+            $httpCode = curl_getinfo($curl, CURLINFO_RESPONSE_CODE);
+            $this->SendDebug(__FUNCTION__, 'Response http code: ' . $httpCode, 0);
+            $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
+            $header = substr($response, 0, $header_size);
+            $this->SendDebug(__FUNCTION__, 'Response header: ' . $header, 0);
+            $body = json_decode(substr($response, $header_size), true);
+            $this->SendDebug(__FUNCTION__, 'Response body: ' . json_encode($body), 0);
+            switch ($httpCode) {
+                case 200:  # OK
+                    $success = $this->UpdateDeviceState(json_encode($body));
+                    break;
+
+            }
+        } else {
+            $error_msg = curl_error($curl);
+            $this->SendDebug(__FUNCTION__, 'An error has occurred: ' . json_encode($error_msg), 0);
+        }
+        curl_close($curl);
+        return $success;
+    }
+
     #################### Private
 
     private function KernelReady(): void
@@ -185,5 +303,50 @@ class Loqed extends IPSModule
             $status = 201;
         }
         $this->SetStatus($status);
+    }
+
+    private function UpdateDeviceState(string $Data): bool
+    {
+        $this->SendDebug(__FUNCTION__, $Data, 0);
+        $smartLockData = json_decode($Data, true);
+        $success = false;
+        if (is_array($smartLockData) && !empty($smartLockData)) {
+            if (array_key_exists('id', $smartLockData)) {
+                $lockID = $this->ReadPropertyString('LockID');
+                if ($smartLockData['id'] != $lockID) {
+                    $this->SendDebug(__FUNCTION__, 'Abort, this data is not for this smart lock id!', 0);
+                    return $success;
+                }
+            }
+            if (array_key_exists('bolt_state_numeric', $smartLockData)) {
+                $success = true;
+                $this->SetValue('DeviceState', $smartLockData['bolt_state_numeric']);
+            }
+            if (array_key_exists('bridge_online', $smartLockData)) {
+                $success = true;
+                $this->SetValue('OnlineState', $smartLockData['bridge_online']);
+            }
+            if (array_key_exists('battery_percentage', $smartLockData)) {
+                $success = true;
+                $this->SetValue('BatteryCharge', $smartLockData['battery_percentage']);
+            }
+            if (array_key_exists('battery_type', $smartLockData)) {
+                $success = true;
+                $this->SetValue('BatteryType', $smartLockData['battery_type']);
+            }
+            if (array_key_exists('guest_access_mode', $smartLockData)) {
+                $success = true;
+                $this->SetValue('GuestAccess', $smartLockData['guest_access_mode']);
+            }
+            if (array_key_exists('twist_assist', $smartLockData)) {
+                $success = true;
+                $this->SetValue('TwistAssist', $smartLockData['twist_assist']);
+            }
+            if (array_key_exists('touch_to_connect', $smartLockData)) {
+                $success = true;
+                $this->SetValue('TouchToConnect', $smartLockData['touch_to_connect']);
+            }
+        }
+        return $success;
     }
 }

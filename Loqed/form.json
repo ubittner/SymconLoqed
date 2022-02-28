@@ -35,11 +35,27 @@
       "type": "ValidationTextBox",
       "name": "LocalKeyID",
       "caption": "Local Key ID"
+    },
+    {
+      "type": "ValidationTextBox",
+      "name": "LockID",
+      "caption": "Lock ID"
     }
   ],
   "actions": [
     {
-      "type": "TestCenter"
+      "type": "ExpansionPanel",
+      "caption": "Developer area",
+      "items": [
+        {
+          "type": "Button",
+          "caption": "Update Device State",
+          "onClick": "LOQED_GetDeviceState($id);"
+        },
+        {
+          "type": "TestCenter"
+        }
+      ]
     }
   ],
   "status": [
