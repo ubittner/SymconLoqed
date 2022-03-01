@@ -5,11 +5,17 @@
 
 declare(strict_types=1);
 
+include_once __DIR__ . '/helper/autoload.php';
+
 class Loqed extends IPSModule
 {
+    //Helper
+    use Helper_webHook;
     //Constants
     private const LIBRARY_GUID = '{9AC35841-9778-D8E8-31CF-0BDAD3E0C3A7}';
     private const MODULE_PREFIX = 'LOQED';
+    private const CORE_WEBHOOK_GUID = '{015A6EB8-D6E5-4B93-B496-0D3F77AE9FE1}';
+    private const CORE_CONNECT_GUID = '{9486D575-BE8C-4ED8-B5B5-20930E26DE6F}';
 
     public function Create()
     {
@@ -107,10 +113,20 @@ class Loqed extends IPSModule
         IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Restriction'), '', 0xF00F00);
         IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Restriction is removed'), '', 0x00FF00);
         $this->RegisterVariableInteger('TouchToConnect', $this->Translate('Touch to connect'), $profile, 260);
+
+        ########## Attributes
+        $this->RegisterAttributeString('WebHookURL', '');
+        $this->RegisterAttributeString('WebHookUser', '');
+        $this->RegisterAttributeString('WebHookPassword', '');
     }
 
     public function Destroy()
     {
+        //Unregister WebHook
+        if (!IPS_InstanceExists($this->InstanceID)) {
+            $this->UnregisterWebhook('/hook/loqed/' . $this->InstanceID);
+        }
+
         //Never delete this line!
         parent::Destroy();
 
@@ -136,7 +152,18 @@ class Loqed extends IPSModule
         if (IPS_GetKernelRunlevel() != KR_READY) {
             return;
         }
-        $this->ValidateConfiguration();
+
+        //WebHook
+        $this->PrepareWebHook();
+        $this->RegisterWebHook('/hook/loqed/' . $this->InstanceID);
+
+        //Validate configuration
+        if (!$this->ValidateConfiguration()) {
+            return;
+        }
+
+        //Update once
+        $this->GetDeviceState();
     }
 
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
@@ -160,6 +187,7 @@ class Loqed extends IPSModule
         $formData = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
         $library = IPS_GetLibrary(self::LIBRARY_GUID);
         $formData['elements'][2]['caption'] = 'ID: ' . $this->InstanceID . ', Version: ' . $library['Version'] . '-' . $library['Build'] . ' vom ' . date('d.m.Y', $library['Date']);
+        $formData['actions'][0]['value'] = $this->ReadAttributeString('WebHookURL');
         return json_encode($formData);
     }
 
@@ -292,17 +320,20 @@ class Loqed extends IPSModule
         $this->ApplyChanges();
     }
 
-    private function ValidateConfiguration(): void
+    private function ValidateConfiguration(): bool
     {
         $status = 102;
+        $result = true;
         $deviceID = $this->ReadPropertyString('DeviceID');
         $apiKey = $this->ReadPropertyString('APIKey');
         $apiToken = $this->ReadPropertyString('APIToken');
         $localKeyID = $this->ReadPropertyString('LocalKeyID');
-        if (empty($deviceID) || empty($apiKey) || empty($apiToken) || empty($localKeyID)) {
+        $lockID = $this->ReadPropertyString('LockID');
+        if (empty($deviceID) || empty($apiKey) || empty($apiToken) || empty($localKeyID) || empty($lockID)) {
             $status = 201;
         }
         $this->SetStatus($status);
+        return $result;
     }
 
     private function UpdateDeviceState(string $Data): bool

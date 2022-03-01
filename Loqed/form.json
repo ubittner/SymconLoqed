@@ -44,6 +44,16 @@
   ],
   "actions": [
     {
+      "type": "ValidationTextBox",
+      "name": "WebHookURL",
+      "caption": "This is your outgoing webhook url for status updates",
+      "width": "800px"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
       "type": "ExpansionPanel",
       "caption": "Developer area",
       "items": [
