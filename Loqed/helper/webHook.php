@@ -29,8 +29,8 @@ trait Helper_webHook
         $smartLockData = json_decode($data, true);
         if (is_array($smartLockData) && !empty($smartLockData)) {
             if (array_key_exists('lock_id', $smartLockData)) {
-                $lockID = $this->ReadPropertyString('LockID');
-                if ($smartLockData['lock_id'] != $lockID) {
+                $deviceID = $this->ReadPropertyString('DeviceID');
+                if ($smartLockData['lock_id'] != $deviceID) {
                     $this->SendDebug(__FUNCTION__, 'Abort, this data is not for this smart lock id!', 0);
                     return;
                 }
