@@ -60,7 +60,7 @@
         {
           "type": "Button",
           "caption": "Update Device State",
-          "onClick": "LOQED_GetDeviceState($id);"
+          "onClick": "LOQED_UpdateDeviceState($id);"
         },
         {
           "type": "TestCenter"

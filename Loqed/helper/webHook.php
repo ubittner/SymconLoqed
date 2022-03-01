@@ -26,7 +26,35 @@ trait Helper_webHook
             $this->SendDebug(__FUNCTION__, 'Abort, wrong user or password!', 0);
             return;
         }
-        $this->UpdateDeviceState($data);
+        $smartLockData = json_decode($data, true);
+        if (is_array($smartLockData) && !empty($smartLockData)) {
+            if (array_key_exists('lock_id', $smartLockData)) {
+                $lockID = $this->ReadPropertyString('LockID');
+                if ($smartLockData['lock_id'] != $lockID) {
+                    $this->SendDebug(__FUNCTION__, 'Abort, this data is not for this smart lock id!', 0);
+                    return;
+                }
+            }
+            if (array_key_exists('requested_state', $smartLockData)) {
+                $state = $smartLockData['requested_state'];
+                switch ($state) {
+                    case 'NIGHT_LOCK':
+                        $deviceState = 0;
+                        break;
+
+                    case 'DAY_LOCK':
+                        $deviceState = 1;
+                        break;
+
+                    case 'OPEN':
+                        $deviceState = 2;
+                        break;
+                }
+                if (isset($deviceState)) {
+                    $this->SetValue('DeviceState', $deviceState);
+                }
+            }
+        }
     }
 
     #################### Private
@@ -99,8 +127,6 @@ trait Helper_webHook
             $credentials = urlencode($user) . ':' . urlencode($password) . '@';
             $webhookURL = substr($url, 0, 8) . $credentials . substr($url, 8) . '/hook/loqed/' . $this->InstanceID;
             $this->WriteAttributeString('WebHookURL', $webhookURL);
-            $this->SendDebug(__FUNCTION__, 'WebHook URL: ' . $url, 0);
-            $this->UpdateFormField('WebHookURL', 'caption', $webhookURL);
         }
     }
 }

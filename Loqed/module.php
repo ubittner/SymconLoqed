@@ -269,7 +269,7 @@ class Loqed extends IPSModule
         return $success;
     }
 
-    public function GetDeviceState(): bool
+    public function UpdateDeviceState(): bool
     {
         $apiToken = $this->ReadPropertyString('APIToken');
         $lockID = $this->ReadPropertyString('LockID');
@@ -297,11 +297,47 @@ class Loqed extends IPSModule
             $header_size = curl_getinfo($curl, CURLINFO_HEADER_SIZE);
             $header = substr($response, 0, $header_size);
             $this->SendDebug(__FUNCTION__, 'Response header: ' . $header, 0);
-            $body = json_decode(substr($response, $header_size), true);
-            $this->SendDebug(__FUNCTION__, 'Response body: ' . json_encode($body), 0);
+            $smartLockData = json_decode(substr($response, $header_size), true);
+            $this->SendDebug(__FUNCTION__, 'Response body: ' . json_encode($smartLockData), 0);
             switch ($httpCode) {
                 case 200:  # OK
-                    $success = $this->UpdateDeviceState(json_encode($body));
+                    if (is_array($smartLockData) && !empty($smartLockData)) {
+                        if (array_key_exists('id', $smartLockData)) {
+                            $lockID = $this->ReadPropertyString('LockID');
+                            if ($smartLockData['id'] != $lockID) {
+                                $this->SendDebug(__FUNCTION__, 'Abort, this data is not for this smart lock id!', 0);
+                                return $success;
+                            }
+                        }
+                        if (array_key_exists('bolt_state_numeric', $smartLockData)) {
+                            $success = true;
+                            $this->SetValue('DeviceState', $smartLockData['bolt_state_numeric']);
+                        }
+                        if (array_key_exists('bridge_online', $smartLockData)) {
+                            $success = true;
+                            $this->SetValue('OnlineState', $smartLockData['bridge_online']);
+                        }
+                        if (array_key_exists('battery_percentage', $smartLockData)) {
+                            $success = true;
+                            $this->SetValue('BatteryCharge', $smartLockData['battery_percentage']);
+                        }
+                        if (array_key_exists('battery_type', $smartLockData)) {
+                            $success = true;
+                            $this->SetValue('BatteryType', $smartLockData['battery_type']);
+                        }
+                        if (array_key_exists('guest_access_mode', $smartLockData)) {
+                            $success = true;
+                            $this->SetValue('GuestAccess', $smartLockData['guest_access_mode']);
+                        }
+                        if (array_key_exists('twist_assist', $smartLockData)) {
+                            $success = true;
+                            $this->SetValue('TwistAssist', $smartLockData['twist_assist']);
+                        }
+                        if (array_key_exists('touch_to_connect', $smartLockData)) {
+                            $success = true;
+                            $this->SetValue('TouchToConnect', $smartLockData['touch_to_connect']);
+                        }
+                    }
                     break;
 
             }
@@ -334,50 +370,5 @@ class Loqed extends IPSModule
         }
         $this->SetStatus($status);
         return $result;
-    }
-
-    private function UpdateDeviceState(string $Data): bool
-    {
-        $this->SendDebug(__FUNCTION__, $Data, 0);
-        $smartLockData = json_decode($Data, true);
-        $success = false;
-        if (is_array($smartLockData) && !empty($smartLockData)) {
-            if (array_key_exists('id', $smartLockData)) {
-                $lockID = $this->ReadPropertyString('LockID');
-                if ($smartLockData['id'] != $lockID) {
-                    $this->SendDebug(__FUNCTION__, 'Abort, this data is not for this smart lock id!', 0);
-                    return $success;
-                }
-            }
-            if (array_key_exists('bolt_state_numeric', $smartLockData)) {
-                $success = true;
-                $this->SetValue('DeviceState', $smartLockData['bolt_state_numeric']);
-            }
-            if (array_key_exists('bridge_online', $smartLockData)) {
-                $success = true;
-                $this->SetValue('OnlineState', $smartLockData['bridge_online']);
-            }
-            if (array_key_exists('battery_percentage', $smartLockData)) {
-                $success = true;
-                $this->SetValue('BatteryCharge', $smartLockData['battery_percentage']);
-            }
-            if (array_key_exists('battery_type', $smartLockData)) {
-                $success = true;
-                $this->SetValue('BatteryType', $smartLockData['battery_type']);
-            }
-            if (array_key_exists('guest_access_mode', $smartLockData)) {
-                $success = true;
-                $this->SetValue('GuestAccess', $smartLockData['guest_access_mode']);
-            }
-            if (array_key_exists('twist_assist', $smartLockData)) {
-                $success = true;
-                $this->SetValue('TwistAssist', $smartLockData['twist_assist']);
-            }
-            if (array_key_exists('touch_to_connect', $smartLockData)) {
-                $success = true;
-                $this->SetValue('TouchToConnect', $smartLockData['touch_to_connect']);
-            }
-        }
-        return $success;
     }
 }
