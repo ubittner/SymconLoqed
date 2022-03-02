@@ -390,6 +390,6 @@ class Loqed extends IPSModule
         } else {
             $timestamp = mktime($hour, $minute, $second, (int) date('n'), (int) date('j'), (int) date('Y'));
         }
-        $this->SetTimerInterval('DailyUpdate',  ($timestamp - $now) * 1000);
+        $this->SetTimerInterval('DailyUpdate', ($timestamp - $now) * 1000);
     }
 }
