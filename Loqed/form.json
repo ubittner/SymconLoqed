@@ -40,6 +40,11 @@
       "type": "ValidationTextBox",
       "name": "LockID",
       "caption": "Lock ID"
+    },
+    {
+      "type": "SelectTime",
+      "name": "DailyUpdateTime",
+      "caption": "Daily Update Time"
     }
   ],
   "actions": [

@@ -28,6 +28,7 @@ class Loqed extends IPSModule
         $this->RegisterPropertyString('APIToken', '');
         $this->RegisterPropertyString('LocalKeyID', '');
         $this->RegisterPropertyString('LockID', '');
+        $this->RegisterPropertyString('DailyUpdateTime', '{"hour":12,"minute":0,"second":0}');
 
         ########## Variables
         //Smart Lock
@@ -118,6 +119,9 @@ class Loqed extends IPSModule
         $this->RegisterAttributeString('WebHookURL', '');
         $this->RegisterAttributeString('WebHookUser', '');
         $this->RegisterAttributeString('WebHookPassword', '');
+
+        ########## Timer
+        $this->RegisterTimer('DailyUpdate', 0, self::MODULE_PREFIX . '_UpdateDeviceState(' . $this->InstanceID . ');');
     }
 
     public function Destroy()
@@ -162,8 +166,8 @@ class Loqed extends IPSModule
             return;
         }
 
-        //Update once
-        $this->GetDeviceState();
+        $this->UpdateDeviceState();
+        $this->SetDailyUpdateTimer();
     }
 
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
@@ -271,6 +275,7 @@ class Loqed extends IPSModule
 
     public function UpdateDeviceState(): bool
     {
+        $this->SetDailyUpdateTimer();
         $apiToken = $this->ReadPropertyString('APIToken');
         $lockID = $this->ReadPropertyString('LockID');
         if (empty($apiToken) || empty($lockID)) {
@@ -370,5 +375,21 @@ class Loqed extends IPSModule
         }
         $this->SetStatus($status);
         return $result;
+    }
+
+    private function SetDailyUpdateTimer(): void
+    {
+        $now = time();
+        $updateTime = json_decode($this->ReadPropertyString('DailyUpdateTime'));
+        $hour = $updateTime->hour;
+        $minute = $updateTime->minute;
+        $second = $updateTime->second;
+        $definedTime = $hour . ':' . $minute . ':' . $second;
+        if (time() >= strtotime($definedTime)) {
+            $timestamp = mktime($hour, $minute, $second, (int) date('n'), (int) date('j') + 1, (int) date('Y'));
+        } else {
+            $timestamp = mktime($hour, $minute, $second, (int) date('n'), (int) date('j'), (int) date('Y'));
+        }
+        $this->SetTimerInterval('DailyUpdate',  ($timestamp - $now) * 1000);
     }
 }
