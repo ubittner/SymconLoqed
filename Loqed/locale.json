@@ -1,8 +1,38 @@
 {
   "translations": {
     "de": {
-    },
-    "nl": {
+      "Daily Update Time": "Tägliche Aktualisierung um",
+      "This is your outgoing webhook URL for the automatic status updates": "Dies ist Ihre ausgehende Webhook-URL für die automatischen Statusaktualisierungen",
+      "Developer area": "Entwicklerbereich",
+      "Update Device State": "Gerätestatus aktualisieren",
+      "Loqed will be created": "Loqed wird erstellt",
+      "Loqed is active": "Loqed ist aktiv",
+      "Loqed will be deleted": "Loqed wird gelöscht",
+      "Loqed is inactive": "Loqed ist inaktiv",
+      "An error has occurred, for further information see messages, log file or debug!": "Es ist Fehler aufgetreten, weitere Informationen unter Meldungen, im Log oder Debug!",
+      "Please check your configuration!": "Bitte überprüfen Sie Ihre Konfiguration",
+      "Lock": "Zusperren",
+      "Unlock": "Aufsperren",
+      "Open": "Tür öffnen",
+      "Offline": "Offline",
+      "Online": "Online",
+      "Online state": "Online-Status",
+      "Unknown": "Unbekannt",
+      "Opened": "Geöffnet",
+      "Unlocked": "Aufgesperrt",
+      "Locked": "Zugesperrt",
+      "Battery charge": "Batterieladung",
+      "Alkaline": "Alkali",
+      "NiMH": "NiMH",
+      "Lithium (non-rechargable)": "Lithium (nicht wiederaufladbar)",
+      "Battery type": "Batterietyp",
+      "Disabled": "Deaktiviert",
+      "Enabled": "Aktiviert",
+      "Guest access": "Gastzugang",
+      "Twist assist": "Drehunterstützung",
+      "Restriction": "Eingeschränkt",
+      "Restriction is removed": "Beschränkung aufgehoben"
+
     }
   }
 }
