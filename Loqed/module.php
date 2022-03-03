@@ -23,7 +23,7 @@ class Loqed extends IPSModule
         parent::Create();
 
         ########## Properties
-        $this->RegisterPropertyString('DeviceID', '');
+        $this->RegisterPropertyString('LockIDold', '');
         $this->RegisterPropertyString('APIKey', '');
         $this->RegisterPropertyString('APIToken', '');
         $this->RegisterPropertyString('LocalKeyID', '');
@@ -105,15 +105,15 @@ class Loqed extends IPSModule
         IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Enabled'), '', 0xFF0000);
         $this->RegisterVariableInteger('TwistAssist', $this->Translate('Twist assist'), $profile, 250);
 
-        //Touch to connect: touch_to_connect (1 if Touch to Open 500-meter restriction is removed, 0 otherwise)
-        $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.TouchToConnect';
+        //Touch To Open: touch_to_connect (1 if Touch to Open 500-meter restriction is removed, 0 otherwise)
+        $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.TouchToOpen';
         if (!IPS_VariableProfileExists($profile)) {
             IPS_CreateVariableProfile($profile, 1);
         }
         IPS_SetVariableProfileIcon($profile, 'Execute');
         IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Restricted to 500m'), '', 0xF00F00);
         IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Restriction is removed'), '', 0x00FF00);
-        $this->RegisterVariableInteger('TouchToConnect', $this->Translate('Touch to Open'), $profile, 260);
+        $this->RegisterVariableInteger('TouchToOpen', $this->Translate('Touch to Open'), $profile, 260);
 
         ########## Attributes
         $this->RegisterAttributeString('WebHookURL', '');
@@ -135,7 +135,7 @@ class Loqed extends IPSModule
         parent::Destroy();
 
         //Delete profiles
-        $profiles = ['SmartLock', 'OnlineState', 'DeviceState', 'BatteryCharge', 'BatteryType', 'GuestAccess', 'TwistAssist', 'TouchToConnect'];
+        $profiles = ['SmartLock', 'OnlineState', 'DeviceState', 'BatteryCharge', 'BatteryType', 'GuestAccess', 'TwistAssist', 'TouchToOpen'];
         foreach ($profiles as $profile) {
             $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.' . $profile;
             if (@IPS_VariableProfileExists($profile)) {
@@ -211,11 +211,11 @@ class Loqed extends IPSModule
 
     public function SetSmartLockAction(int $Action): bool
     {
-        $deviceID = $this->ReadPropertyString('DeviceID');
+        $lockIDold = $this->ReadPropertyString('LockIDold');
         $apiKey = $this->ReadPropertyString('APIKey');
         $apiToken = $this->ReadPropertyString('APIToken');
         $localKeyID = $this->ReadPropertyString('LocalKeyID');
-        if (empty($deviceID) || empty($apiKey) || empty($apiToken) || empty($localKeyID)) {
+        if (empty($lockIDold) || empty($apiKey) || empty($apiToken) || empty($localKeyID)) {
             $this->SendDebug(__FUNCTION__, 'Please check your configuration!', 0);
             return false;
         }
@@ -238,7 +238,7 @@ class Loqed extends IPSModule
                 return false;
         }
         $success = false;
-        $endpoint = 'https://gateway.production.loqed.com/v1/locks/' . urlencode($deviceID) . '/state?lock_api_key=' . urlencode($apiKey) . '&api_token=' . urlencode($apiToken) . '&lock_state=' . $lockAction . '&local_key_id=' . urlencode($localKeyID);
+        $endpoint = 'https://gateway.production.loqed.com/v1/locks/' . urlencode($lockIDold) . '/state?lock_api_key=' . urlencode($apiKey) . '&api_token=' . urlencode($apiToken) . '&lock_state=' . $lockAction . '&local_key_id=' . urlencode($localKeyID);
         $this->SendDebug(__FUNCTION__, 'Endpoint: ' . $endpoint, 0);
         $curl = curl_init();
         curl_setopt_array($curl, [
@@ -340,7 +340,7 @@ class Loqed extends IPSModule
                         }
                         if (array_key_exists('touch_to_connect', $smartLockData)) {
                             $success = true;
-                            $this->SetValue('TouchToConnect', $smartLockData['touch_to_connect']);
+                            $this->SetValue('TouchToOpen', $smartLockData['touch_to_connect']);
                         }
                     }
                     break;
@@ -365,12 +365,12 @@ class Loqed extends IPSModule
     {
         $status = 102;
         $result = true;
-        $deviceID = $this->ReadPropertyString('DeviceID');
+        $lockIDold = $this->ReadPropertyString('LockIDold');
         $apiKey = $this->ReadPropertyString('APIKey');
         $apiToken = $this->ReadPropertyString('APIToken');
         $localKeyID = $this->ReadPropertyString('LocalKeyID');
         $lockID = $this->ReadPropertyString('LockID');
-        if (empty($deviceID) || empty($apiKey) || empty($apiToken) || empty($localKeyID) || empty($lockID)) {
+        if (empty($lockIDold) || empty($apiKey) || empty($apiToken) || empty($localKeyID) || empty($lockID)) {
             $status = 201;
         }
         $this->SetStatus($status);

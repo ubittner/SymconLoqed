@@ -46,7 +46,7 @@ __Configuration__:
 
 Name                | Description
 ------------------- | -----------------
-Device ID           | Device ID
+Lock ID (old)       | Lock ID (old)
 API Key             | API Key
 API Token           | API Token
 Local Key ID        | Local Key ID
@@ -82,7 +82,7 @@ BatteryCharge                   | integer | Battery charge (in %)
 BatteryType                     | integer | Battery type
 GuestAccess                     | integer | Guest access
 TwistAssist                     | integer | Twist assist
-TouchToConnect                  | integer | TouchToConnect
+TouchToOpen                     | integer | Touch To Open
 
 ##### Profile:
 
@@ -97,7 +97,7 @@ BatteryCharge           | integer
 BatteryType             | integer
 GuestAccess             | integer
 TwistAssist             | integer
-TouchToConnect          | integer
+TouchToOpen             | integer
 
 If the `Loqed` instance is deleted, the profiles listed above are automatically deleted.
 

@@ -46,7 +46,7 @@ __Konfigurationsseite__:
 
 Name                | Beschreibung
 ------------------- | --------------------------------------------
-Device ID           | Device ID
+Lock ID (old)       | Lock ID (old)
 API Key             | API Key
 API Token           | API Token
 Local Key ID        | Local Key ID
@@ -82,7 +82,7 @@ BatteryCharge                   | integer | Batterieladung (in %)
 BatteryType                     | integer | Batterietyp
 GuestAccess                     | integer | Gastzugang
 TwistAssist                     | integer | Drehunterstützung
-TouchToConnect                  | integer | TouchToConnect
+TouchToOpen                     | integer | Touch To Open
 
 ##### Profile:
 
@@ -97,7 +97,7 @@ BatteryCharge           | integer
 BatteryType             | integer
 GuestAccess             | integer
 TwistAssist             | integer
-TouchToConnect          | integer
+TouchToOpen             | integer
 
 Wird die `Loqed` Instanz gelöscht, so werden automatisch die oben aufgeführten Profile gelöscht.
 
