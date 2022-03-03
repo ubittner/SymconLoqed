@@ -17,6 +17,7 @@
       "Offline": "Offline",
       "Online": "Online",
       "Online state": "Online-Status",
+      "Device state": "Gerätestatus",
       "Unknown": "Unbekannt",
       "Opened": "Geöffnet",
       "Unlocked": "Aufgesperrt",
@@ -30,9 +31,9 @@
       "Enabled": "Aktiviert",
       "Guest access": "Gastzugang",
       "Twist assist": "Drehunterstützung",
-      "Restriction": "Eingeschränkt",
+      "Touch to Open": "Touch to Open",
+      "Restricted to 500m": "Eingeschränkt auf 500m",
       "Restriction is removed": "Beschränkung aufgehoben"
-
     }
   }
 }

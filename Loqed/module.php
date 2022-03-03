@@ -111,9 +111,9 @@ class Loqed extends IPSModule
             IPS_CreateVariableProfile($profile, 1);
         }
         IPS_SetVariableProfileIcon($profile, 'Execute');
-        IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Restriction'), '', 0xF00F00);
+        IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Restricted to 500m'), '', 0xF00F00);
         IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Restriction is removed'), '', 0x00FF00);
-        $this->RegisterVariableInteger('TouchToConnect', $this->Translate('Touch to connect'), $profile, 260);
+        $this->RegisterVariableInteger('TouchToConnect', $this->Translate('Touch to Open'), $profile, 260);
 
         ########## Attributes
         $this->RegisterAttributeString('WebHookURL', '');
