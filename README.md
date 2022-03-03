@@ -8,4 +8,21 @@
 [![Check Style](https://github.com/ubittner/SymconLoqed/workflows/Check%20Style/badge.svg)](https://github.com/ubittner/SymconLoqed/actions)
 [![Run Tests](https://github.com/ubittner/SymconLoqed/workflows/Run%20Tests/badge.svg)](https://github.com/ubittner/SymconLoqed/actions)
 
-This repositiory integrates [LOQED](https://loqed.com) into [IP-Symcon](https://www.symcon.de), the only lock that opens your door with a single tap.
+#### Deutsch:
+
+Dieses Repository integriert ein [LOQED Smart Lock](https://loqed.com) in [IP-Symcon](https://www.symcon.de), das einzige Schloss, das Ihre Tür mit einer Berührung öffnet.
+
+Folgende Module beinhaltet dieses Repository (in alphabetischer Reihenfolge):
+
+- __Loqed__ ([Dokumentation](./docs/Loqed/de/README.md))  
+  Dieses Modul steuert dein Loqed Smart Lock.
+
+  
+#### English:
+
+This repositiory integrates a [LOQED Smart Lock](https://loqed.com) into [IP-Symcon](https://www.symcon.de), the only lock that opens your door with a single tap.
+
+The following modules are included in this repository (in alphabetical order):
+
+- __Loqed__ ([Documentation](./docs/Loqed/en/README.md))  
+  This module controls your Loqed Smart Lock.
