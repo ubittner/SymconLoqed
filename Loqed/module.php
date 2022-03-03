@@ -59,9 +59,9 @@ class Loqed extends IPSModule
         }
         IPS_SetVariableProfileIcon($profile, '');
         IPS_SetVariableProfileAssociation($profile, 0, $this->Translate('Unknown'), 'Warning', 0xFF0000);
-        IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Open'), 'Door', 0xFF0000);
-        IPS_SetVariableProfileAssociation($profile, 2, $this->Translate('Unlocked'), 'LockOpen', 0x0000FF);
-        IPS_SetVariableProfileAssociation($profile, 3, $this->Translate('Locked'), 'LockClosed', 0x0000FF);
+        IPS_SetVariableProfileAssociation($profile, 1, $this->Translate('Opened'), 'Door', 0x0000FF);
+        IPS_SetVariableProfileAssociation($profile, 2, $this->Translate('Unlocked'), 'LockOpen', 0x00FF00);
+        IPS_SetVariableProfileAssociation($profile, 3, $this->Translate('Locked'), 'LockClosed', 0xFF0000);
         $this->RegisterVariableInteger('DeviceState', $this->Translate('Device state'), $profile, 210);
 
         //Battery charge: battery_percentage
@@ -135,7 +135,7 @@ class Loqed extends IPSModule
         parent::Destroy();
 
         //Delete profiles
-        $profiles = ['SmartLock'];
+        $profiles = ['SmartLock', 'OnlineState', 'DeviceState', 'BatteryCharge', 'BatteryType', 'GuestAccess', 'TwistAssist', 'TouchToConnect'];
         foreach ($profiles as $profile) {
             $profile = self::MODULE_PREFIX . '.' . $this->InstanceID . '.' . $profile;
             if (@IPS_VariableProfileExists($profile)) {

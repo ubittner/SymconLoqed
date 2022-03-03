@@ -51,7 +51,7 @@
     {
       "type": "ValidationTextBox",
       "name": "WebHookURL",
-      "caption": "This is your outgoing webhook url for status updates",
+      "caption": "This is your outgoing webhook URL for the automatic status updates",
       "width": "800px"
     },
     {

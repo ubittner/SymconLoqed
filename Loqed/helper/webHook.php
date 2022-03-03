@@ -39,16 +39,22 @@ trait Helper_webHook
                 $state = $smartLockData['requested_state'];
                 switch ($state) {
                     case 'NIGHT_LOCK':
+                        $smartLockValue = 0;
                         $deviceState = 3;
                         break;
 
                     case 'DAY_LOCK':
+                        $smartLockValue = 1;
                         $deviceState = 2;
                         break;
 
                     case 'OPEN':
+                        $smartLockValue = 2;
                         $deviceState = 1;
                         break;
+                }
+                if (isset($smartLockValue)) {
+                    $this->SetValue('SmartLock', $smartLockValue);
                 }
                 if (isset($deviceState)) {
                     $this->SetValue('DeviceState', $deviceState);
