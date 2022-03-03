@@ -105,6 +105,8 @@ If the `Loqed` instance is deleted, the profiles listed above are automatically 
 
 The functionality provided by the module in the WebFront:
 
+[![Image](../../../imgs/webfront_en.png)]()
+
 * Unlock, lock and open
 * Display device status (various)
 

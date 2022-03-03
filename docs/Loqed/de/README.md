@@ -105,6 +105,8 @@ Wird die `Loqed` Instanz gelöscht, so werden automatisch die oben aufgeführten
 
 Die Funktionalität, die das Modul im WebFront bietet:  
 
+[![Image](../../../imgs/webfront_de.png)]()  
+
 * Smart Lock Aktionen (auf- und zusperren + weitere Funktionen)
 * Gerätestatus anzeigen (diverse)
  
