@@ -337,9 +337,9 @@ class LoqedWebhooks extends IPSModule
                             $success = true;
                             $this->SetValue('BatteryCharge', $smartLockData['battery_percentage']);
                         }
-                        if (array_key_exists('battery_type', $smartLockData)) {
+                        if (array_key_exists('battery_type_numeric', $smartLockData)) {
                             $success = true;
-                            $this->SetValue('BatteryType', $smartLockData['battery_type']);
+                            $this->SetValue('BatteryType', $smartLockData['battery_type_numeric']);
                         }
                         if (array_key_exists('guest_access_mode', $smartLockData)) {
                             $success = true;
