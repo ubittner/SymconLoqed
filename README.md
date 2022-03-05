@@ -8,7 +8,7 @@
 [![Check Style](https://github.com/ubittner/SymconLoqed/workflows/Check%20Style/badge.svg)](https://github.com/ubittner/SymconLoqed/actions)
 [![Run Tests](https://github.com/ubittner/SymconLoqed/workflows/Run%20Tests/badge.svg)](https://github.com/ubittner/SymconLoqed/actions)
 
-#### Deutsch:
+#### :de: Deutsch:
 
 Dieses Repository integriert ein [LOQED Smart Lock](https://loqed.com) in [IP-Symcon](https://www.symcon.de).  
 
@@ -20,7 +20,7 @@ Folgende Module beinhaltet dieses Repository (in alphabetischer Reihenfolge):
   Dieses Modul integriert dein LOQED Smart Lock mittels Webhhoks.
 
   
-#### English:
+#### :us: :uk: English:
 
 This repositiory integrates a [LOQED Smart Lock](https://loqed.com) into [IP-Symcon](https://www.symcon.de).  
 
