@@ -13,6 +13,6 @@ class SymconLoqedValidationTest extends TestCaseSymconValidation
 
     public function testValidateLoqedModule(): void
     {
-        $this->validateModule(__DIR__ . '/../Loqed');
+        $this->validateModule(__DIR__ . '/../Webhooks');
     }
 }

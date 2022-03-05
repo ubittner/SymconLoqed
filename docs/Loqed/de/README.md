@@ -1,8 +1,10 @@
 [![Image](../../../imgs/logo_bg_white.png)](https://loqed.com)
 
-### Loqed Smart Lock
+### LOQED Webhooks
 
-Dieses Modul integriert ein [LOQED Smart Lock](https://loqed.com) in [IP-Symcon](https://www.symcon.de), das einzige Schloss, das Ihre Tür mit einer Berührung öffnet.
+Dieses Modul integriert ein [LOQED Smart Lock](https://loqed.com) in [IP-Symcon](https://www.symcon.de) mittels Webhooks.  
+
+Das einzige Schloss, das Ihre Tür mit einer Berührung öffnet.
 
 Für dieses Modul besteht kein Anspruch auf Fehlerfreiheit, Weiterentwicklung, sonstige Unterstützung oder Support.  
 Bevor das Modul installiert wird, sollte unbedingt ein Backup von IP-Symcon durchgeführt werden.  
@@ -27,8 +29,8 @@ Der Nutzer stimmt den o.a. Bedingungen, sowie den Lizenzbedingungen ausdrücklic
 ### 2. Voraussetzungen
 
 - IP-Symcon ab Version 6.0
-- Loqed Smart Lock
-- Aktivierte Webhooks im [Loqed Web Portal](https://de.loqed.com/pages/support#reamaze#0#/kb/integration/webhooks-de)
+- LOQED Smart Lock
+- Aktivierte Webhooks im [LOQED Web Portal](https://de.loqed.com/pages/support#reamaze#0#/kb/integration/webhooks-de)
 - Internetverbindung
 - IP-Symcon Subskription (für automatische Statusaktualisierungen)
 
@@ -39,31 +41,38 @@ Der Nutzer stimmt den o.a. Bedingungen, sowie den Lizenzbedingungen ausdrücklic
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-- In IP-Symcon an beliebiger Stelle `Instanz hinzufügen` auswählen und `Loqed` auswählen, welches unter dem Hersteller `Loqed` aufgeführt ist.
-- Es wird eine neue `Loqed` Instanz angelegt.
+- In IP-Symcon an beliebiger Stelle `Instanz hinzufügen` auswählen und `Loqed Webhooks` auswählen, welches unter dem Hersteller `Loqed` aufgeführt ist.
+- Es wird eine neue `Loqed Webhooks` Instanz angelegt.
 
 __Konfigurationsseite__:
 
-Name                | Beschreibung
-------------------- | --------------------------------------------
-Lock ID (old)       | Lock ID (old)
-API Key             | API Key
-API Token           | API Token
-Local Key ID        | Local Key ID
-Lock ID             | Lock ID
-Daily Update Time   | Zeitpunkt zur täglichen Statusaktualisierung
+Name                                    | Beschreibung
+--------------------------------------- | ---------------------------------------
+LOQED Webhooks Dokumentation            |
+Lock ID (old)                           | Lock ID (old)
+API Key                                 | API Key
+API Token                               | API Token
+Local Key ID                            | Local Key ID
+Lock ID                                 | Lock ID
+Tägliche Statusaktualisierung verwenden | Tägliche Statusaktualisierung verwenden
+Tägliche Aktualisierung um              | Uhrzeit der Statusaktualisierung
+Tägliches Zusperren verwenden           | Tägliches Zusperren verwenden
+Zusperren um                            | Uhrzeit Zusperren
+Tägliches Aufsperren verwenden          | Tägliches Aufsperren verwenden
+Aufsperren um                           | Uhrzeit Aufsperren
 
 __Schaltflächen im Aktionsbereich__:
 
 Name                    | Beschreibung
 ----------------------- | -----------------------
 Webhook URL             |
+LOQED Webhooks Portal   |
 Entwicklerbereich       |
 Status aktualisieren    | Aktualisiert den Status
 
 __Vorgehensweise__:  
 
-Registrieren Sie sich bitte im [Loqed Web Portal](https://de.loqed.com/pages/support#reamaze#0#/kb/integration/webhooks-de) für die benötigten Webhooks.  
+Registrieren Sie sich bitte im [LOQED Web Portal](https://de.loqed.com/pages/support#reamaze#0#/kb/integration/webhooks-de) für die benötigten Webhooks.  
 Geben Sie Ihre Daten für das Smart Lock an und übernehmen Sie anschließend die Änderungen.
 
 ### 5. Statusvariablen und Profile

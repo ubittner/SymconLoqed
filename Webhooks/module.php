@@ -7,7 +7,7 @@ declare(strict_types=1);
 
 include_once __DIR__ . '/helper/autoload.php';
 
-class Loqed extends IPSModule
+class LoqedWebhooks extends IPSModule
 {
     //Helper
     use Helper_webHook;
@@ -28,7 +28,12 @@ class Loqed extends IPSModule
         $this->RegisterPropertyString('APIToken', '');
         $this->RegisterPropertyString('LocalKeyID', '');
         $this->RegisterPropertyString('LockID', '');
+        $this->RegisterPropertyBoolean('UseDailyStatusUpdate', true);
         $this->RegisterPropertyString('DailyUpdateTime', '{"hour":12,"minute":0,"second":0}');
+        $this->RegisterPropertyBoolean('UseDailyLock', false);
+        $this->RegisterPropertyString('DailyLockTime', '{"hour":23,"minute":0,"second":0}');
+        $this->RegisterPropertyBoolean('UseDailyUnlock', false);
+        $this->RegisterPropertyString('DailyUnlockTime', '{"hour":6,"minute":0,"second":0}');
 
         ########## Variables
         //Smart Lock
@@ -122,6 +127,8 @@ class Loqed extends IPSModule
 
         ########## Timer
         $this->RegisterTimer('DailyUpdate', 0, self::MODULE_PREFIX . '_UpdateDeviceState(' . $this->InstanceID . ');');
+        $this->RegisterTimer('DailyLock', 0, self::MODULE_PREFIX . '_SetSmartLockAction(' . $this->InstanceID . ', 0);');
+        $this->RegisterTimer('DailyUnlock', 0, self::MODULE_PREFIX . '_SetSmartLockAction(' . $this->InstanceID . ', 1);');
     }
 
     public function Destroy()
@@ -168,6 +175,8 @@ class Loqed extends IPSModule
 
         $this->UpdateDeviceState();
         $this->SetDailyUpdateTimer();
+        $this->SetDailyLockTimer();
+        $this->SetDailyUnlockTimer();
     }
 
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
@@ -191,7 +200,7 @@ class Loqed extends IPSModule
         $formData = json_decode(file_get_contents(__DIR__ . '/form.json'), true);
         $library = IPS_GetLibrary(self::LIBRARY_GUID);
         $formData['elements'][2]['caption'] = 'ID: ' . $this->InstanceID . ', Version: ' . $library['Version'] . '-' . $library['Build'] . ' vom ' . date('d.m.Y', $library['Date']);
-        $formData['actions'][0]['value'] = $this->ReadAttributeString('WebHookURL');
+        $formData['actions'][1]['value'] = $this->ReadAttributeString('WebHookURL');
         return json_encode($formData);
     }
 
@@ -211,6 +220,8 @@ class Loqed extends IPSModule
 
     public function SetSmartLockAction(int $Action): bool
     {
+        $this->SetDailyLockTimer();
+        $this->SetDailyUnlockTimer();
         $lockIDold = $this->ReadPropertyString('LockIDold');
         $apiKey = $this->ReadPropertyString('APIKey');
         $apiToken = $this->ReadPropertyString('APIToken');
@@ -390,6 +401,50 @@ class Loqed extends IPSModule
         } else {
             $timestamp = mktime($hour, $minute, $second, (int) date('n'), (int) date('j'), (int) date('Y'));
         }
-        $this->SetTimerInterval('DailyUpdate', ($timestamp - $now) * 1000);
+        $interval = ($timestamp - $now) * 1000;
+        if (!$this->ReadPropertyBoolean('UseDailyStatusUpdate')) {
+            $interval = 0;
+        }
+        $this->SetTimerInterval('DailyUpdate', $interval);
+    }
+
+    private function SetDailyLockTimer(): void
+    {
+        $now = time();
+        $lockTime = json_decode($this->ReadPropertyString('DailyLockTime'));
+        $hour = $lockTime->hour;
+        $minute = $lockTime->minute;
+        $second = $lockTime->second;
+        $definedTime = $hour . ':' . $minute . ':' . $second;
+        if (time() >= strtotime($definedTime)) {
+            $timestamp = mktime($hour, $minute, $second, (int) date('n'), (int) date('j') + 1, (int) date('Y'));
+        } else {
+            $timestamp = mktime($hour, $minute, $second, (int) date('n'), (int) date('j'), (int) date('Y'));
+        }
+        $interval = ($timestamp - $now) * 1000;
+        if (!$this->ReadPropertyBoolean('UseDailyLock')) {
+            $interval = 0;
+        }
+        $this->SetTimerInterval('DailyLock', $interval);
+    }
+
+    private function SetDailyUnlockTimer(): void
+    {
+        $now = time();
+        $unlockTime = json_decode($this->ReadPropertyString('DailyUnlockTime'));
+        $hour = $unlockTime->hour;
+        $minute = $unlockTime->minute;
+        $second = $unlockTime->second;
+        $definedTime = $hour . ':' . $minute . ':' . $second;
+        if (time() >= strtotime($definedTime)) {
+            $timestamp = mktime($hour, $minute, $second, (int) date('n'), (int) date('j') + 1, (int) date('Y'));
+        } else {
+            $timestamp = mktime($hour, $minute, $second, (int) date('n'), (int) date('j'), (int) date('Y'));
+        }
+        $interval = ($timestamp - $now) * 1000;
+        if (!$this->ReadPropertyBoolean('UseDailyUnlock')) {
+            $interval = 0;
+        }
+        $this->SetTimerInterval('DailyUnlock', $interval);
     }
 }

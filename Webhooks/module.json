@@ -1,8 +1,8 @@
 {
   "id": "{25E5EE32-0C3B-78B1-4B68-03B33878A64C}",
-  "name": "Loqed",
+  "name": "Loqed Webhooks",
   "type": 3,
-  "vendor": "Loqed",
+  "vendor": "Loqed Webhooks",
   "aliases": [],
   "url": "https://github.com/ubittner/SymconLoqed",
   "parentRequirements": [],

@@ -1,8 +1,17 @@
 {
   "translations": {
     "de": {
-      "Daily Update Time": "Tägliche Aktualisierung um",
-      "This is your outgoing webhook URL for the automatic status updates": "Dies ist Ihre ausgehende Webhook-URL für die automatischen Statusaktualisierungen",
+      "The configuration data for your Smart Lock can be found on the LOQED Webhooks platform": "Die Konfigurationsdaten für Ihr Smart Lock finden Sie auf der LOQED Webhooks Plattform",
+      "LOQED Webhooks Documentation": "LOQED Webhooks Dokumentation",
+      "Use daily status update": "Tägliche Statusaktualisierung",
+      "Update time": "Aktualisierung um",
+      "Use daily lock": "Tägliches Zusperren",
+      "Lock time": "Zusperren um",
+      "Use daily unlock": "Tägliches Aufsperren",
+      "Unlock time": "Aufsperren um",
+      "This is your outgoing webhook URL for the automatic status updates": "Dies ist Ihre ausgehende Webhook URL für die automatischen Statusaktualisierungen",
+      "Please enter this URL on the LOQED Webhooks portal": "Bitte geben Sie diese URL auf dem LOQED Webhooks Portal an",
+      "LOQED Webhooks Platform": "LOQED Webhooks Plattform",
       "Developer area": "Entwicklerbereich",
       "Update Device State": "Gerätestatus aktualisieren",
       "Loqed will be created": "Loqed wird erstellt",

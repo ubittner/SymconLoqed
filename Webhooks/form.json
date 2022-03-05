@@ -6,11 +6,24 @@
     },
     {
       "type": "Label",
-      "caption": "Loqed Device"
+      "caption": "Loqed Webhooks"
     },
     {
       "type": "Label",
       "caption": "Version:"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Label",
+      "caption": "The configuration data for your Smart Lock can be found on the LOQED Webhooks platform"
+    },
+    {
+      "type": "Button",
+      "caption": "LOQED Webhooks Documentation",
+      "onClick": "echo 'https://loqed.com/pages/support#reamaze#0#/kb/integrations/webhooks-en';"
     },
     {
       "type": "Label",
@@ -42,17 +55,59 @@
       "caption": "Lock ID"
     },
     {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "CheckBox",
+      "name": "UseDailyStatusUpdate",
+      "caption": "Use daily status update"
+    },
+    {
       "type": "SelectTime",
       "name": "DailyUpdateTime",
-      "caption": "Daily Update Time"
+      "caption": "Update time"
+    },
+    {
+      "type": "CheckBox",
+      "name": "UseDailyLock",
+      "caption": "Use daily lock"
+    },
+    {
+      "type": "SelectTime",
+      "name": "DailyLockTime",
+      "caption": "Lock time"
+    },
+    {
+      "type": "CheckBox",
+      "name": "UseDailyUnlock",
+      "caption": "Use daily unlock"
+    },
+    {
+      "type": "SelectTime",
+      "name": "DailyUnlockTime",
+      "caption": "Unlock time"
     }
   ],
   "actions": [
     {
+      "type": "Label",
+      "caption": "This is your outgoing webhook URL for the automatic status updates"
+    },
+    {
       "type": "ValidationTextBox",
       "name": "WebHookURL",
-      "caption": "This is your outgoing webhook URL for the automatic status updates",
+      "caption": "URL",
       "width": "800px"
+    },
+    {
+      "type": "Label",
+      "caption": "Please enter this URL on the LOQED Webhooks portal"
+    },
+    {
+      "type": "Button",
+      "caption": "LOQED Webhooks Platform",
+      "onClick": "echo 'https://webhooks.loqed.com';"
     },
     {
       "type": "Label",
@@ -77,22 +132,22 @@
     {
       "code": 101,
       "icon": "active",
-      "caption": "Loqed will be created"
+      "caption": "Loqed Webhooks will be created"
     },
     {
       "code": 102,
       "icon": "active",
-      "caption": "Loqed is active"
+      "caption": "Loqed Webhooks is active"
     },
     {
       "code": 103,
       "icon": "active",
-      "caption": "Loqed will be deleted"
+      "caption": "Loqed Webhooks will be deleted"
     },
     {
       "code": 104,
       "icon": "inactive",
-      "caption": "Loqed is inactive"
+      "caption": "Loqed Webhooks is inactive"
     },
     {
       "code": 200,

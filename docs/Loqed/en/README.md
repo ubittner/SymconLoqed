@@ -1,8 +1,10 @@
 [![Image](../../../imgs/logo_bg_white.png)](https://loqed.com)
 
-### Loqed Smart Lock
+### LOQED Webhooks
 
-This module integrates a [LOQED Smart Lock](https://loqed.com) into [IP-Symcon](https://www.symcon.de), the only lock that opens your door with a single tap.  
+This module integrates a [LOQED Smart Lock](https://loqed.com) into [IP-Symcon](https://www.symcon.de) using Webhooks.  
+
+The only lock that opens your door with a single tap.  
 
 For this module there is no claim for further development, other support or can include errors.  
 Before installing the module, a backup of IP-Symcon should be performed.  
@@ -28,7 +30,7 @@ The user expressly agrees to the above conditions, as well as the license condit
 
 - IP-Symcon at least version 6.0
 - Loqed Smart Lock
-- Activated webhooks on [Loqed Web Portal](https://loqed.com/pages/support#reamaze#0#/kb/integrations/webhooks-en)
+- Activated webhooks on [LOQED Web Portal](https://loqed.com/pages/support#reamaze#0#/kb/integrations/webhooks-en)
 - Internet connection
 - IP-Symcon subscription (for automatic device state updates)
 
@@ -39,31 +41,38 @@ The user expressly agrees to the above conditions, as well as the license condit
 
 ### 4. Setting up the instance
 
-- In IP-Symcon select `Add instance` at any place and select `Loqed` which is listed under the manufacturer `Loqed`.
-- A new `Loqed` instance will be created.
+- In IP-Symcon select `Add instance` at any place and select `Loqed Webhooks` which is listed under the manufacturer `Loqed`.
+- A new `Loqed Webhooks` instance will be created.
 
 __Configuration__:
 
-Name                | Description
-------------------- | -----------------
-Lock ID (old)       | Lock ID (old)
-API Key             | API Key
-API Token           | API Token
-Local Key ID        | Local Key ID
-Lock ID             | Lock ID
-Daily Update Time   | Daily Update Time
+Name                            | Description
+------------------------------- | ------------------------
+LOQED Webhooks Documentation    |
+Lock ID (old)                   | Lock ID (old)
+API Key                         | API Key
+API Token                       | API Token
+Local Key ID                    | Local Key ID
+Lock ID                         | Lock ID
+Use daily status update         | Use daily status update
+Daily update time               | Daily update time
+Use daily lock                  | Use daily lock
+Daily lock time                 | Daily lock time
+Use daily unlock                | Use daily unlock
+Daily unlock time               | Daily unlock time
 
 __Buttons in the action area__:
 
 Name                    | Description
 ----------------------- | --------------------------------
 Webhook URL             |
+LOQED Webhooks Portal   |
 Developer area          |
 Update device state     | Updates the state of the device
 
 __Procedure__:
 
-Please register first on the [Loqed Web Portal](https://loqed.com/pages/support#reamaze#0#/kb/integrations/webhooks-en) for the required webhooks.  
+Please register first on the [LOQED Web Portal](https://loqed.com/pages/support#reamaze#0#/kb/integrations/webhooks-en) for the required webhooks.  
 Enter your data for the smart lock and then apply the changes.
 
 ### 5. Statevariables and profiles
