@@ -25,6 +25,7 @@ Der Nutzer stimmt den o.a. Bedingungen, sowie den Lizenzbedingungen ausdrücklic
 
 * Schloss zu- und aufsperren inkl. weiterer Funktionen
 * Gerätestatus anzeigen (diverse)
+* Protokoll
 
 ### 2. Voraussetzungen
 
@@ -60,6 +61,8 @@ Tägliches Zusperren verwenden           | Tägliches Zusperren verwenden
 Zusperren um                            | Uhrzeit Zusperren
 Tägliches Aufsperren verwenden          | Tägliches Aufsperren verwenden
 Aufsperren um                           | Uhrzeit Aufsperren
+Protokoll verwenden                     | Protokoll verwenden
+Anzahl der maximalen Protokolleinträge  | Anzahl der maximalen Protokolleinträge
 
 __Schaltflächen im Aktionsbereich__:
 
@@ -92,6 +95,7 @@ BatteryType                     | integer | Batterietyp
 GuestAccess                     | integer | Gastzugang
 TwistAssist                     | integer | Drehunterstützung
 TouchToOpen                     | integer | Touch To Open
+ActivityLog                     | string  | Protokoll
 
 ##### Profile:
 
@@ -118,6 +122,7 @@ Die Funktionalität, die das Modul im WebFront bietet:
 
 * Smart Lock Aktionen (auf- und zusperren + weitere Funktionen)
 * Gerätestatus anzeigen (diverse)
+* Protokoll
  
 ### 7. PHP-Befehlsreferenz
 

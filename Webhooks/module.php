@@ -34,6 +34,8 @@ class LoqedWebhooks extends IPSModule
         $this->RegisterPropertyString('DailyLockTime', '{"hour":23,"minute":0,"second":0}');
         $this->RegisterPropertyBoolean('UseDailyUnlock', false);
         $this->RegisterPropertyString('DailyUnlockTime', '{"hour":6,"minute":0,"second":0}');
+        $this->RegisterPropertyBoolean('UseActivityLog', false);
+        $this->RegisterPropertyInteger('ActivityLogMaximumEntries', 10);
 
         ########## Variables
         //Smart Lock
@@ -167,6 +169,19 @@ class LoqedWebhooks extends IPSModule
         //WebHook
         $this->PrepareWebHook();
         $this->RegisterWebHook('/hook/loqed/' . $this->InstanceID);
+
+        ########## Maintain variable
+
+        //Activity log
+        if ($this->ReadPropertyBoolean('UseActivityLog')) {
+            $id = @$this->GetIDForIdent('ActivityLog');
+            $this->MaintainVariable('ActivityLog', $this->Translate('Activity log'), 3, 'HTMLBox', 300, true);
+            if ($id == false) {
+                IPS_SetIcon($this->GetIDForIdent('ActivityLog'), 'Database');
+            }
+        } else {
+            $this->MaintainVariable('ActivityLog', $this->Translate('Activity log'), 3, '', 0, false);
+        }
 
         //Validate configuration
         if (!$this->ValidateConfiguration()) {
@@ -446,5 +461,47 @@ class LoqedWebhooks extends IPSModule
             $interval = 0;
         }
         $this->SetTimerInterval('DailyUnlock', $interval);
+    }
+
+    private function UpdateActivityLog(string $TimeStamp, string $Action, string $User, string $Email): void
+    {
+        if (!$this->ReadPropertyBoolean('UseActivityLog')) {
+            $this->SendDebug(__FUNCTION__, 'Abort, activity log is disabled', 0);
+            return;
+        }
+        $string = $this->GetValue('ActivityLog');
+        if (empty($string)) {
+            $entries = [];
+            $this->SendDebug(__FUNCTION__, 'String is empty!', 0);
+        } else {
+            $entries = explode('<tr><td>', $string);
+            //Remove header
+            foreach ($entries as $key => $entry) {
+                if ($entry == "<table style='width: 100%; border-collapse: collapse;'><tr> <td><b>" . $this->Translate('Date') . '</b></td> <td><b>' . $this->Translate('Action') . '</b></td> <td><b>' . $this->Translate('User') . '</b></td> <td><b>' . $this->Translate('EMail') . '</b></td> </tr>') {
+                    unset($entries[$key]);
+                }
+            }
+            //Remove table
+            foreach ($entries as $key => $entry) {
+                $position = strpos($entry, '</table>');
+                if ($position > 0) {
+                    $entries[$key] = str_replace('</table>', '', $entry);
+                }
+            }
+        }
+        array_unshift($entries, $TimeStamp . '</td><td>' . $Action . '</td><td>' . $User . '</td><td>' . $Email . '</td></tr>');
+        $maximumEntries = $this->ReadPropertyInteger('ActivityLogMaximumEntries') - 1;
+        foreach ($entries as $key => $entry) {
+            if ($key > $maximumEntries) {
+                unset($entries[$key]);
+            }
+        }
+        $newString = "<table style='width: 100%; border-collapse: collapse;'><tr> <td><b>" . $this->Translate('Date') . '</b></td> <td><b>' . $this->Translate('Action') . '</b></td> <td><b>' . $this->Translate('User') . '</b></td> <td><b>' . $this->Translate('EMail') . '</b></td> </tr>';
+        foreach ($entries as $entry) {
+            $newString .= '<tr><td>' . $entry;
+        }
+        $newString .= '</table>';
+        $this->SendDebug(__FUNCTION__, 'New string: ' . $newString, 0);
+        $this->SetValue('ActivityLog', $newString);
     }
 }

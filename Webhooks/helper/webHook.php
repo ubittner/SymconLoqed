@@ -11,6 +11,7 @@ trait Helper_webHook
 
     protected function ProcessHookData()
     {
+        $timestamp = date('d.m.Y H:i:s');
         //Get incomming data from server
         $this->SendDebug(__FUNCTION__, 'Incoming data: ' . print_r($_SERVER, true), 0);
         //Get content
@@ -41,16 +42,19 @@ trait Helper_webHook
                     case 'NIGHT_LOCK':
                         $smartLockValue = 0;
                         $deviceState = 3;
+                        $action = $this->Translate('Locked');
                         break;
 
                     case 'DAY_LOCK':
                         $smartLockValue = 1;
                         $deviceState = 2;
+                        $action = $this->Translate('Unlocked');
                         break;
 
                     case 'OPEN':
                         $smartLockValue = 2;
                         $deviceState = 1;
+                        $action = $this->Translate('Opened');
                         break;
                 }
                 if (isset($smartLockValue)) {
@@ -58,6 +62,16 @@ trait Helper_webHook
                 }
                 if (isset($deviceState)) {
                     $this->SetValue('DeviceState', $deviceState);
+                }
+                //Update log
+                if (array_key_exists('key_name_user', $smartLockData)) {
+                    $user = $smartLockData['key_name_user'];
+                }
+                if (array_key_exists('key_account_email', $smartLockData)) {
+                    $eMail = $smartLockData['key_account_email'];
+                }
+                if (isset($user) && isset($action) && isset($eMail)) {
+                    $this->UpdateActivityLog($timestamp, $action, $user, $eMail);
                 }
             }
         }

@@ -25,6 +25,7 @@ The user expressly agrees to the above conditions, as well as the license condit
 
 * Unlock, lock and open
 * Display device status (various)
+* Activity log
 
 ### 2. Requirements
 
@@ -46,20 +47,22 @@ The user expressly agrees to the above conditions, as well as the license condit
 
 __Configuration__:
 
-Name                            | Description
-------------------------------- | ------------------------
-LOQED Webhooks Documentation    |
-Lock ID (old)                   | Lock ID (old)
-API Key                         | API Key
-API Token                       | API Token
-Local Key ID                    | Local Key ID
-Lock ID                         | Lock ID
-Use daily status update         | Use daily status update
-Daily update time               | Daily update time
-Use daily lock                  | Use daily lock
-Daily lock time                 | Daily lock time
-Use daily unlock                | Use daily unlock
-Daily unlock time               | Daily unlock time
+Name                                | Description
+----------------------------------- | ----------------------------------
+LOQED Webhooks Documentation        |
+Lock ID (old)                       | Lock ID (old)
+API Key                             | API Key
+API Token                           | API Token
+Local Key ID                        | Local Key ID
+Lock ID                             | Lock ID
+Use daily status update             | Use daily status update
+Daily update time                   | Daily update time
+Use daily lock                      | Use daily lock
+Daily lock time                     | Daily lock time
+Use daily unlock                    | Use daily unlock
+Daily unlock time                   | Daily unlock time
+Use activity log                    | Use activity log
+Number of maximum activity entries  | Number of maximum activity entries
 
 __Buttons in the action area__:
 
@@ -92,6 +95,7 @@ BatteryType                     | integer | Battery type
 GuestAccess                     | integer | Guest access
 TwistAssist                     | integer | Twist assist
 TouchToOpen                     | integer | Touch To Open
+ActivityLog                     | string  | Activity log
 
 ##### Profile:
 
@@ -118,6 +122,7 @@ The functionality provided by the module in the WebFront:
 
 * Unlock, lock and open
 * Display device status (various)
+* Activity log
 
 ### 7. PHP command reference
 

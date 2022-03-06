@@ -87,12 +87,33 @@
       "type": "SelectTime",
       "name": "DailyUnlockTime",
       "caption": "Unlock time"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Label",
+      "caption": "If you want to use the activity log, the outgoing webhook must be registered on the LOQED Webhooks portal"
+    },
+    {
+      "type": "CheckBox",
+      "name": "UseActivityLog",
+      "caption": "Use activity log"
+    },
+    {
+      "type": "NumberSpinner",
+      "name": "ActivityLogMaximumEntries",
+      "caption": "Number of maximum activity entries",
+      "minimum": 1,
+      "maximum": 50,
+      "suffix": "entries"
     }
   ],
   "actions": [
     {
       "type": "Label",
-      "caption": "This is your outgoing webhook URL for the automatic status updates"
+      "caption": "This is your outgoing webhook URL for the automatic status updates and activity log"
     },
     {
       "type": "ValidationTextBox",
