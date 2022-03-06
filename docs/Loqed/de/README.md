@@ -1,4 +1,4 @@
-[![Image](../../../imgs/logo_bg_white.png)](https://loqed.com)
+[![Image](../../../imgs/LOQED_logo_20.png)](https://loqed.com)
 
 ### LOQED Webhooks
 

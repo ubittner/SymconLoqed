@@ -1,4 +1,4 @@
-[![Image](imgs/logo_bg_white.png)](https://loqed.com)
+[![Image](imgs/LOQED_logo_20.png)](https://loqed.com)
 
 [![IP-Symcon is awesome!](https://img.shields.io/badge/IP--Symcon-6.0-blue.svg)](https://www.symcon.de)
 [![Module Version](https://img.shields.io/badge/Module_Version-1.0-blue.svg)]()
