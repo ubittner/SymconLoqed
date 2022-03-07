@@ -120,6 +120,8 @@ Die Funktionalität, die das Modul im WebFront bietet:
 
 [![Image](../../../imgs/webfront_de.png)]()  
 
+[![Image](../../../imgs/webfront_mobile_de.png)]()
+
 * Smart Lock Aktionen (auf- und zusperren + weitere Funktionen)
 * Gerätestatus anzeigen (diverse)
 * Protokoll
