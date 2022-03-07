@@ -64,11 +64,17 @@ trait Helper_webHook
                     $this->SetValue('DeviceState', $deviceState);
                 }
                 //Update log
-                if (array_key_exists('key_name_user', $smartLockData)) {
-                    $user = $smartLockData['key_name_user'];
+                if (array_key_exists('value2', $smartLockData)) {
+                    $user = $smartLockData['value2'];
+                    if ($user == 'null') {
+                        $user = $this->Translate('Someone');
+                    }
                 }
                 if (array_key_exists('key_account_email', $smartLockData)) {
                     $eMail = $smartLockData['key_account_email'];
+                    if ($eMail == 'null') {
+                        $eMail = '';
+                    }
                 }
                 if (isset($user) && isset($action) && isset($eMail)) {
                     $this->UpdateActivityLog($timestamp, $action, $user, $eMail);

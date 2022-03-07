@@ -69,6 +69,10 @@
       "caption": "Update time"
     },
     {
+      "type": "Label",
+      "caption": " "
+    },
+    {
       "type": "CheckBox",
       "name": "UseDailyLock",
       "caption": "Use daily lock"
