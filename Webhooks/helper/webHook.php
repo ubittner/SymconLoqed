@@ -67,7 +67,8 @@ trait Helper_webHook
                 if (array_key_exists('value2', $smartLockData)) {
                     $user = $smartLockData['value2'];
                     if ($user == 'null') {
-                        $user = $this->Translate('Someone');
+                        $this->SendDebug(__FUNCTION__, 'Abort, user is null!', 0);
+                        return;
                     }
                 }
                 if (array_key_exists('key_account_email', $smartLockData)) {
