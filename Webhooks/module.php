@@ -241,7 +241,7 @@ class LoqedWebhooks extends IPSModule
         $apiKey = $this->ReadPropertyString('APIKey');
         $apiToken = $this->ReadPropertyString('APIToken');
         $localKeyID = $this->ReadPropertyString('LocalKeyID');
-        if (empty($lockIDold) || empty($apiKey) || empty($apiToken) || empty($localKeyID)) {
+        if ($lockIDold == '' || $apiKey == '' || $apiToken == '' || $localKeyID == '') {
             $this->SendDebug(__FUNCTION__, 'Please check your configuration!', 0);
             return false;
         }
@@ -304,7 +304,7 @@ class LoqedWebhooks extends IPSModule
         $this->SetDailyUpdateTimer();
         $apiToken = $this->ReadPropertyString('APIToken');
         $lockID = $this->ReadPropertyString('LockID');
-        if (empty($apiToken) || empty($lockID)) {
+        if ($apiToken == '' || $lockID == '') {
             $this->SendDebug(__FUNCTION__, 'Please check your configuration!', 0);
             return false;
         }
@@ -396,7 +396,7 @@ class LoqedWebhooks extends IPSModule
         $apiToken = $this->ReadPropertyString('APIToken');
         $localKeyID = $this->ReadPropertyString('LocalKeyID');
         $lockID = $this->ReadPropertyString('LockID');
-        if (empty($lockIDold) || empty($apiKey) || empty($apiToken) || empty($localKeyID) || empty($lockID)) {
+        if ($lockIDold == '' || $apiKey == '' || $apiToken == '' || $localKeyID == '' || $lockID == '') {
             $status = 201;
         }
         $this->SetStatus($status);
