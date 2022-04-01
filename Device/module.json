@@ -1,0 +1,14 @@
+{
+  "id": "{5ED9958D-1D89-F620-7CEF-FF38B8FDD201}",
+  "name": "Loqed Device",
+  "type": 3,
+  "vendor": "Loqed",
+  "aliases": [
+    "Loqed Device"
+  ],
+  "url": "https://github.com/ubittner/SymconLoqed",
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "LOQED"
+}

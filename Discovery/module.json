@@ -1,0 +1,14 @@
+{
+  "id": "{84B922A4-A01D-EE8A-7303-E1D1B053C1B5}",
+  "name": "Loqed Discovery",
+  "type": 5,
+  "vendor": "Loqed",
+  "aliases": [
+    "Loqed Discovery"
+  ],
+  "url": "https://github.com/ubittner/SymconLoqed",
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "LOQED"
+}

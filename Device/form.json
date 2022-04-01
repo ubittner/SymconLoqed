@@ -1,0 +1,256 @@
+{
+  "elements": [
+    {
+      "type": "Image",
+      "image": "data:image/png;base64, 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"
+    },
+    {
+      "type": "Label",
+      "caption": "Version:"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "ValidationTextBox",
+      "name": "DeviceName",
+      "caption": "Device Name"
+    },
+    {
+      "type": "ValidationTextBox",
+      "name": "BridgeIP",
+      "caption": "LOQED Bridge IP Address"
+    },
+    {
+      "type": "NumberSpinner",
+      "name": "BridgePort",
+      "caption": "LOQED Bridge Port",
+      "minimum": "1"
+    },
+    {
+      "type": "NumberSpinner",
+      "name": "Timeout",
+      "caption": "Network Timeout",
+      "suffix": "Milliseconds"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Label",
+      "caption": "The configuration data for your device can be found in the API configuration area on the LOQED website"
+    },
+    {
+      "type": "RowLayout",
+      "items": [
+        {
+          "type": "Button",
+          "caption": "Documentation",
+          "onClick": "echo 'https://loqed.com/pages/support?lang=en#reamaze%230%23/articles/local-bridge-api-en';"
+        },
+        {
+          "type": "Button",
+          "caption": "Login",
+          "onClick": "echo 'https://app.loqed.com/API-Config/';"
+        }
+      ]
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Label",
+      "caption": "Outgoing Webhooks via LOQED Bridge"
+    },
+    {
+      "type": "ValidationTextBox",
+      "name": "DeviceConfigKey",
+      "caption": "Device Config Key",
+      "width": "600px"
+    },
+    {
+      "type": "CheckBox",
+      "name": "UseWebhook",
+      "caption": "Use automatic update",
+      "width": "300px"
+    },
+    {
+      "type": "ValidationTextBox",
+      "name": "HostIP",
+      "caption": "IP-Symcon Host IP-Address"
+    },
+    {
+      "type": "NumberSpinner",
+      "name": "HostPort",
+      "caption": "IP-Symcon Host Port"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Label",
+      "caption": "API Keys (incoming webhooks)"
+    },
+    {
+      "type": "ValidationTextBox",
+      "name": "LocalKeyID",
+      "caption": "Local Key ID"
+    },
+    {
+      "type": "ValidationTextBox",
+      "name": "Key",
+      "caption": "Key",
+      "width": "600px"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "CheckBox",
+      "name": "UseDailyLock",
+      "caption": "Use daily lock"
+    },
+    {
+      "type": "SelectTime",
+      "name": "DailyLockTime",
+      "caption": "Lock time"
+    },
+    {
+      "type": "CheckBox",
+      "name": "UseDailyUnlock",
+      "caption": "Use daily unlock"
+    },
+    {
+      "type": "SelectTime",
+      "name": "DailyUnlockTime",
+      "caption": "Unlock time"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Label",
+      "caption": "If you want to use the activity log, the automatic update must be enabled"
+    },
+    {
+      "type": "CheckBox",
+      "name": "UseActivityLog",
+      "caption": "Use activity log"
+    },
+    {
+      "type": "NumberSpinner",
+      "name": "ActivityLogMaximumEntries",
+      "caption": "Number of maximum activity entries",
+      "minimum": 1,
+      "maximum": 50,
+      "suffix": "entries"
+    }
+  ],
+  "actions": [
+    {
+      "type": "ExpansionPanel",
+      "caption": "Developer area",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "State"
+        },
+        {
+          "type": "Button",
+          "caption": "Update Device State",
+          "onClick": "LOQED_UpdateDeviceState($id);"
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "Label",
+          "caption": "Webhooks"
+        },
+        {
+          "type": "Button",
+          "caption": "List",
+          "onClick": "$data=LOQED_ListBridgeWebhooks($id); print_r(json_decode($data, true));"
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "NumberSpinner",
+              "name": "WebhookID",
+              "caption": "Webhook ID"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "PopupButton",
+              "caption": "Delete",
+              "popup": {
+                "caption": "Do you really want to delete the webhook?",
+                "items": [
+                  {
+                    "type": "Button",
+                    "caption": "Delete",
+                    "onClick": "$data=LOQED_DeleteBridgeWebhook($id, $WebhookID); print_r(json_decode($data, true));"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "Label",
+          "caption": "Switching"
+        },
+        {
+          "type": "TestCenter"
+        }
+      ]
+    }
+  ],
+  "status": [
+    {
+      "code": 101,
+      "icon": "active",
+      "caption": "Loqed Device will be created"
+    },
+    {
+      "code": 102,
+      "icon": "active",
+      "caption": "Loqed Device is active"
+    },
+    {
+      "code": 103,
+      "icon": "active",
+      "caption": "Loqed Device will be deleted"
+    },
+    {
+      "code": 104,
+      "icon": "inactive",
+      "caption": "Loqed Device is inactive"
+    },
+    {
+      "code": 200,
+      "icon": "inactive",
+      "caption": "An error has occurred, for further information see messages, log file or debug!"
+    },
+    {
+      "code": 201,
+      "icon": "inactive",
+      "caption": "Please check your configuration!"
+    }
+  ]
+}
