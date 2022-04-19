@@ -57,22 +57,18 @@ __Configuration__:
 | LOQED Bridge IP Adresse            | IP-Address LOQED Bridge           |
 | LOQED Bridge Port                  | Port LOQED Bridge                 |
 | Network Timeout                    | Netzwork Timeout                  |
-|
 | Outgoing Webhooks via LOQED Bridge |                                   |
 | Device Config Key                  | Device Config Key                 |
 | Use automatic update               | automatic update for device state |
 | IP-Symcon Host IP-Adresse          | IP-Address IP-Symcon              |
 | IP-Symcon Host Port                | Port IP-Symcon                    |
-|
 | API Keys (incoming webhooks)       |                                   |
 | Local Key ID                       | Local Key ID                      |
 | Key                                | Key                               |
-|
 | Use daily lock                     | Use daily lock                    |
 | Lock time                          | Lock time                         |
 | Use daily unlock                   | Use daily unblock                 |
 | Unlock time                        | Unlock time                       |
-|
 | Use activity log                   | Use activity log                  |
 | Number of maximum activity entries | Maximum activity entries          |
 

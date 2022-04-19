@@ -57,22 +57,18 @@ __Konfigurationsseite__:
 | LOQED Bridge IP Adresse                | IP-Adresse der LOQED Bridge            |
 | LOQED Bridge Port                      | Port der LOQED Bridge                  |
 | Netzwerk Timeout                       | Netzwerk Timeout                       |
-|
 | Outgoing Webhooks via LOQED Bridge     |                                        |
 | Device Config Key                      | Device Config Key                      |
 | Automatische Statusaktualisierung      | Automatische Statusaktualisierung      |
 | IP-Symcon Host IP-Adresse              | IP-Adresse von IP-Symcon               |
 | IP-Symcon Host Port                    | Port von IP-Symcon                     |
-|
 | API Keys (incoming webhooks)           |                                        |
 | Local Key ID                           | Local Key ID                           |
 | Key                                    | Key                                    |
-|
 | Tägliches Zusperren                    | Tägliches Zusperren verwenden          |
 | Zusperren um                           | Uhrzeit Zusperren                      |
 | Tägliches Aufsperren                   | Tägliches Aufsperren verwenden         |
 | Aufsperren um                          | Uhrzeit Aufsperren                     |
-|
 | Protokoll verwenden                    | Protokoll verwenden                    |
 | Anzahl der maximalen Protokolleinträge | Anzahl der maximalen Protokolleinträge |
 
