@@ -43,17 +43,17 @@ Der Nutzer stimmt den o.a. Bedingungen, sowie den Lizenzbedingungen ausdrücklic
 
 __Konfigurationsseite__:
 
-Name        | Beschreibung
---------    | ----------------------------------------------------------
-Kategorie   | Kategorie
-Geräte      | Liste der erkannten Geräte
+| Name      | Beschreibung               |
+|-----------|----------------------------|
+| Kategorie | Kategorie                  |
+| Geräte    | Liste der erkannten Geräte |
 
 __Schaltflächen__:
 
-Name            | Beschreibung
---------------- | -----------------------------------------------------------------
-Alle erstellen  | Erstellt für alle aufgelisteten Geräte jeweils eine Instanz
-Erstellen       | Erstellt für das ausgewählte Gerät eine Instanz
+| Name           | Beschreibung                                                |
+|----------------|-------------------------------------------------------------|
+| Alle erstellen | Erstellt für alle aufgelisteten Geräte jeweils eine Instanz |
+| Erstellen      | Erstellt für das ausgewählte Gerät eine Instanz             |
 
 __Vorgehensweise__:
 

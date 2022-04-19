@@ -47,31 +47,31 @@ The user expressly agrees to the above conditions, as well as the license condit
 
 __Configuration__:
 
-Name                                | Description
------------------------------------ | ----------------------------------
-LOQED Webhooks Documentation        |
-Lock ID (old)                       | Lock ID (old)
-API Key                             | API Key
-API Token                           | API Token
-Local Key ID                        | Local Key ID
-Lock ID                             | Lock ID
-Use daily status update             | Use daily status update
-Daily update time                   | Daily update time
-Use daily lock                      | Use daily lock
-Daily lock time                     | Daily lock time
-Use daily unlock                    | Use daily unlock
-Daily unlock time                   | Daily unlock time
-Use activity log                    | Use activity log
-Number of maximum activity entries  | Number of maximum activity entries
+| Name                               | Description                        |
+|------------------------------------|------------------------------------|
+| LOQED Webhooks Documentation       |                                    |
+| Lock ID (old)                      | Lock ID (old)                      |
+| API Key                            | API Key                            |
+| API Token                          | API Token                          |
+| Local Key ID                       | Local Key ID                       |
+| Lock ID                            | Lock ID                            |
+| Use daily status update            | Use daily status update            |
+| Daily update time                  | Daily update time                  |
+| Use daily lock                     | Use daily lock                     |
+| Daily lock time                    | Daily lock time                    |
+| Use daily unlock                   | Use daily unlock                   |
+| Daily unlock time                  | Daily unlock time                  |
+| Use activity log                   | Use activity log                   |
+| Number of maximum activity entries | Number of maximum activity entries |
 
 __Buttons in the action area__:
 
-Name                    | Description
------------------------ | --------------------------------
-Webhook URL             |
-LOQED Webhooks Portal   |
-Developer area          |
-Update device state     | Updates the state of the device
+| Name                  | Description                     |
+|-----------------------|---------------------------------|
+| Webhook URL           |                                 |
+| LOQED Webhooks Portal |                                 |
+| Developer area        |                                 |
+| Update device state   | Updates the state of the device |
 
 __Procedure__:
 
@@ -85,32 +85,32 @@ Deleting individual ones can lead to malfunctions.
 
 ##### Statusvariables
 
-Name                            | Type    | Description
-------------------------------- | ------- | --------------------------------
-SmartLock                       | integer | Unlock, lock and open Smart Lock
-OnlineState                     | integer | Online state
-DeviceState                     | integer | Device state (various)
-BatteryCharge                   | integer | Battery charge (in %)
-BatteryType                     | integer | Battery type
-GuestAccess                     | integer | Guest access
-TwistAssist                     | integer | Twist assist
-TouchToOpen                     | integer | Touch To Open
-ActivityLog                     | string  | Activity log
+| Name          | Type    | Description                      |
+|---------------|---------|----------------------------------|
+| SmartLock     | integer | Unlock, lock and open Smart Lock |
+| OnlineState   | integer | Online state                     |
+| DeviceState   | integer | Device state (various)           |
+| BatteryCharge | integer | Battery charge (in %)            |
+| BatteryType   | integer | Battery type                     |
+| GuestAccess   | integer | Guest access                     |
+| TwistAssist   | integer | Twist assist                     |
+| TouchToOpen   | integer | Touch To Open                    |
+| ActivityLog   | string  | Activity log                     |
 
 ##### Profile:
 
 LOQED.InstanceID.Name
 
-Name                    | Type
------------------------ | -------
-SmartLock               | integer
-OnlineState             | integer
-DeviceState             | integer
-BatteryCharge           | integer
-BatteryType             | integer
-GuestAccess             | integer
-TwistAssist             | integer
-TouchToOpen             | integer
+| Name          | Type    |
+|---------------|---------|
+| SmartLock     | integer |
+| OnlineState   | integer |
+| DeviceState   | integer |
+| BatteryCharge | integer |
+| BatteryType   | integer |
+| GuestAccess   | integer |
+| TwistAssist   | integer |
+| TouchToOpen   | integer |
 
 If the `Loqed` instance is deleted, the profiles listed above are automatically deleted.
 
@@ -140,11 +140,11 @@ $InstanceID:    Instance ID of the smart lock
 $Action:        Executes an action for the smart lock according to the table:  
 ```
 
-Value   | Smart lock action            
-------- | ----------------- 
-0       | lock                         
-1       | unlock 
-2       | open 
+| Value | Smart lock action |
+|-------|-------------------|
+| 0     | lock              |
+| 1     | unlock            |
+| 2     | open              |
 
 ```text
 Example:  

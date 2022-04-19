@@ -44,17 +44,17 @@ The user expressly agrees to the above conditions, as well as the license condit
 
 __Configuration__:
 
-Name        | Description
------------ | -----------------------------
-Category    | category for the devices
-Devices     | list of the available devices
+| Name     | Description                   |
+|----------|-------------------------------|
+| Category | category for the devices      |
+| Devices  | list of the available devices |
 
 __Buttons in the action area__:
 
-Name        | Description
-------------| ---------------------------------------------------
-Create all  | Creates one instance for each of the listed devices
-Create      | Creates an instance for the selected device
+| Name       | Description                                         |
+|------------|-----------------------------------------------------|
+| Create all | Creates one instance for each of the listed devices |
+| Create     | Creates an instance for the selected device         |
 
 __Procedure__:
 

@@ -51,40 +51,40 @@ Manual setup:
 
 __Configuration__:
 
-Name                                | Beschreibung
------------------------------------ | ---------------------------------------
-Device Name                         | Device name
-LOQED Bridge IP Adresse             | IP-Address LOQED Bridge
-LOQED Bridge Port                   | Port LOQED Bridge
-Network Timeout                     | Netzwork Timeout
-                                    |
-Outgoing Webhooks via LOQED Bridge  |
-Device Config Key                   | Device Config Key
-Use automatic update                | automatic update for device state
-IP-Symcon Host IP-Adresse           | IP-Address IP-Symcon
-IP-Symcon Host Port                 | Port IP-Symcon
-                                    |
-API Keys (incoming webhooks)        |
-Local Key ID                        | Local Key ID
-Key                                 | Key
-                                    |
-Use daily lock                      | Use daily lock
-Lock time                           | Lock time
-Use daily unlock                    | Use daily unblock
-Unlock time                         | Unlock time
-                                    |
-Use activity log                    | Use activity log
-Number of maximum activity entries  | Maximum activity entries
+| Name                               | Beschreibung                      |
+|------------------------------------|-----------------------------------|
+| Device Name                        | Device name                       |
+| LOQED Bridge IP Adresse            | IP-Address LOQED Bridge           |
+| LOQED Bridge Port                  | Port LOQED Bridge                 |
+| Network Timeout                    | Netzwork Timeout                  |
+|
+| Outgoing Webhooks via LOQED Bridge |                                   |
+| Device Config Key                  | Device Config Key                 |
+| Use automatic update               | automatic update for device state |
+| IP-Symcon Host IP-Adresse          | IP-Address IP-Symcon              |
+| IP-Symcon Host Port                | Port IP-Symcon                    |
+|
+| API Keys (incoming webhooks)       |                                   |
+| Local Key ID                       | Local Key ID                      |
+| Key                                | Key                               |
+|
+| Use daily lock                     | Use daily lock                    |
+| Lock time                          | Lock time                         |
+| Use daily unlock                   | Use daily unblock                 |
+| Unlock time                        | Unlock time                       |
+|
+| Use activity log                   | Use activity log                  |
+| Number of maximum activity entries | Maximum activity entries          |
 
 __Buttons in the action area__:
 
-Name                    | Description
------------------------ | --------------------------------
-Developer area          |
-Update device state     | Updates the state of the device
-Webhooks                |
-List                    | List webhooks
-Delete                  | Delete Webhook ID
+| Name                | Description                     |
+|---------------------|---------------------------------|
+| Developer area      |                                 |
+| Update device state | Updates the state of the device |
+| Webhooks            |                                 |
+| List                | List webhooks                   |
+| Delete              | Delete Webhook ID               |
 
 __Procedure__:
 
@@ -98,26 +98,26 @@ Deleting individual ones can lead to malfunctions.
 
 ##### Statusvariables
 
-Name                            | Type    | Description
-------------------------------- | ------- | --------------------------------
-SmartLock                       | integer | Unlock, lock and open Smart Lock
-OnlineState                     | integer | Online state
-DeviceState                     | integer | Device state (various)
-BatteryCharge                   | integer | Battery charge (in %)
-BatteryType                     | integer | Battery type
-ActivityLog                     | string  | Activity log
+| Name          | Type    | Description                      |
+|---------------|---------|----------------------------------|
+| SmartLock     | integer | Unlock, lock and open Smart Lock |
+| OnlineState   | integer | Online state                     |
+| DeviceState   | integer | Device state (various)           |
+| BatteryCharge | integer | Battery charge (in %)            |
+| BatteryType   | integer | Battery type                     |
+| ActivityLog   | string  | Activity log                     |
 
 ##### Profile:
 
 LOQED.InstanceID.Name
 
-Name                    | Type
------------------------ | -------
-SmartLock               | integer
-OnlineState             | integer
-DeviceState             | integer
-BatteryCharge           | integer
-BatteryType             | integer
+| Name          | Type    |
+|---------------|---------|
+| SmartLock     | integer |
+| OnlineState   | integer |
+| DeviceState   | integer |
+| BatteryCharge | integer |
+| BatteryType   | integer |
 
 If the instance is deleted, the profiles listed above are automatically deleted.
 
@@ -147,11 +147,11 @@ $InstanceID:    Instance ID of the smart lock
 $Action:        Executes an action for the smart lock according to the table:  
 ```
 
-Value   | Smart lock action            
-------- | ----------------- 
-0       | lock                         
-1       | unlock 
-2       | open 
+| Value | Smart lock action |
+|-------|-------------------|
+| 0     | lock              |
+| 1     | unlock            |
+| 2     | open              |
 
 ```text
 Example:  

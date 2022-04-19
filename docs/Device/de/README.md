@@ -51,40 +51,40 @@ Manuelle Einrichtung:
 
 __Konfigurationsseite__:
 
-Name                                    | Beschreibung
---------------------------------------- | ---------------------------------------
-Gerätename                              | Gerätename
-LOQED Bridge IP Adresse                 | IP-Adresse der LOQED Bridge
-LOQED Bridge Port                       | Port der LOQED Bridge
-Netzwerk Timeout                        | Netzwerk Timeout
-                                        |
-Outgoing Webhooks via LOQED Bridge      |
-Device Config Key                       | Device Config Key
-Automatische Statusaktualisierung       | Automatische Statusaktualisierung
-IP-Symcon Host IP-Adresse               | IP-Adresse von IP-Symcon
-IP-Symcon Host Port                     | Port von IP-Symcon
-                                        |
-API Keys (incoming webhooks)            |
-Local Key ID                            | Local Key ID
-Key                                     | Key
-                                        |
-Tägliches Zusperren                     | Tägliches Zusperren verwenden
-Zusperren um                            | Uhrzeit Zusperren
-Tägliches Aufsperren                    | Tägliches Aufsperren verwenden
-Aufsperren um                           | Uhrzeit Aufsperren
-                                        |
-Protokoll verwenden                     | Protokoll verwenden
-Anzahl der maximalen Protokolleinträge  | Anzahl der maximalen Protokolleinträge
+| Name                                   | Beschreibung                           |
+|----------------------------------------|----------------------------------------|
+| Gerätename                             | Gerätename                             |
+| LOQED Bridge IP Adresse                | IP-Adresse der LOQED Bridge            |
+| LOQED Bridge Port                      | Port der LOQED Bridge                  |
+| Netzwerk Timeout                       | Netzwerk Timeout                       |
+|
+| Outgoing Webhooks via LOQED Bridge     |                                        |
+| Device Config Key                      | Device Config Key                      |
+| Automatische Statusaktualisierung      | Automatische Statusaktualisierung      |
+| IP-Symcon Host IP-Adresse              | IP-Adresse von IP-Symcon               |
+| IP-Symcon Host Port                    | Port von IP-Symcon                     |
+|
+| API Keys (incoming webhooks)           |                                        |
+| Local Key ID                           | Local Key ID                           |
+| Key                                    | Key                                    |
+|
+| Tägliches Zusperren                    | Tägliches Zusperren verwenden          |
+| Zusperren um                           | Uhrzeit Zusperren                      |
+| Tägliches Aufsperren                   | Tägliches Aufsperren verwenden         |
+| Aufsperren um                          | Uhrzeit Aufsperren                     |
+|
+| Protokoll verwenden                    | Protokoll verwenden                    |
+| Anzahl der maximalen Protokolleinträge | Anzahl der maximalen Protokolleinträge |
 
 __Schaltflächen im Aktionsbereich__:
 
-Name                        | Beschreibung
---------------------------- | ------------------------------
-Entwicklerbereich           |
-Gerätestatus aktualisieren  | Aktualisiert den Gerätestatus
-Webhooks                    |
-Anzeigen                    | Webhooks anzeigen
-Löschen                     | Webhook mit der ID löschen
+| Name                       | Beschreibung                  |
+|----------------------------|-------------------------------|
+| Entwicklerbereich          |                               |
+| Gerätestatus aktualisieren | Aktualisiert den Gerätestatus |
+| Webhooks                   |                               |
+| Anzeigen                   | Webhooks anzeigen             |
+| Löschen                    | Webhook mit der ID löschen    |
 
 __Vorgehensweise__:  
 
@@ -98,26 +98,26 @@ Das Löschen einzelner kann zu Fehlfunktionen führen.
 
 ##### Statusvariablen
 
-Name                            | Typ     | Beschreibung
-------------------------------- | ------- | -------------------------------------------------------------
-SmartLock                       | integer | Smart Lock Aktionen (auf- und zusperren + weitere Funktionen)
-OnlineState                     | integer | Onlinestatus
-DeviceState                     | integer | Gerätestatus (diverse)
-BatteryCharge                   | integer | Batterieladung (in %)
-BatteryType                     | integer | Batterietyp
-ActivityLog                     | string  | Protokoll
+| Name          | Typ     | Beschreibung                                                  |
+|---------------|---------|---------------------------------------------------------------|
+| SmartLock     | integer | Smart Lock Aktionen (auf- und zusperren + weitere Funktionen) |
+| OnlineState   | integer | Onlinestatus                                                  |
+| DeviceState   | integer | Gerätestatus (diverse)                                        |
+| BatteryCharge | integer | Batterieladung (in %)                                         |
+| BatteryType   | integer | Batterietyp                                                   |
+| ActivityLog   | string  | Protokoll                                                     |
 
 ##### Profile:
 
 LOQED.InstanzID.Name
 
-Name                    | Typ
------------------------ | -------
-SmartLock               | integer
-OnlineState             | integer
-DeviceState             | integer
-BatteryCharge           | integer
-BatteryType             | integer
+| Name          | Typ     |
+|---------------|---------|
+| SmartLock     | integer |
+| OnlineState   | integer |
+| DeviceState   | integer |
+| BatteryCharge | integer |
+| BatteryType   | integer |
 
 Wird die Instanz gelöscht, so werden automatisch die oben aufgeführten Profile gelöscht.
 
@@ -147,11 +147,11 @@ $InstanzID:     Instanz ID des Smart Locks
 $Aktion:        Führt eine Aktion für das Smart Lock gemäss Tabelle aus:  
 ```
 
-Wert | Smart Lock Aktion            | Smart Lock Aktion (deutsch)          
----- | ---------------------------- | ---------------------------
-0    | lock                         | zusperren
-1    | unlock                       | aufsperren
-2    | open                         | öffnen
+| Wert | Smart Lock Aktion | Smart Lock Aktion (deutsch) |
+|------|-------------------|-----------------------------|
+| 0    | lock              | zusperren                   |
+| 1    | unlock            | aufsperren                  |
+| 2    | open              | öffnen                      |
 
 ```text
 Beispiel:  
