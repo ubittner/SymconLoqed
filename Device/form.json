@@ -48,7 +48,7 @@
         {
           "type": "Button",
           "caption": "Documentation",
-          "onClick": "echo 'https://loqed.com/pages/support?lang=en#reamaze%230%23/articles/local-bridge-api-en';"
+          "onClick": "echo 'https://support.loqed.com/en/articles/6127856-loqed-local-bridge-api-integration';"
         },
         {
           "type": "Button",
