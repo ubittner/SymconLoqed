@@ -213,7 +213,11 @@ trait Webhooks
         //Get content
         $data = file_get_contents('php://input');
         $this->SendDebug(__FUNCTION__, 'Data: ' . $data, 0);
-        // Check credentials
+        //Check credentials
+        if (!array_key_exists('PHP_AUTH_USER', $_SERVER) || !array_key_exists('PHP_AUTH_PW', $_SERVER)) {
+            $this->SendDebug(__FUNCTION__, 'Abort, no credentials found in the header!', 0);
+            return;
+        }
         $user = urldecode($_SERVER['PHP_AUTH_USER']);
         $password = urldecode($_SERVER['PHP_AUTH_PW']);
         $this->SendDebug(__FUNCTION__, 'User: ' . $user . ' Password: ' . $password, 0);
@@ -222,6 +226,17 @@ trait Webhooks
         if (($user != $webHookUser) || ($password != $webHookPassword)) {
             $this->SendDebug(__FUNCTION__, 'Abort, wrong user or password!', 0);
             return;
+        }
+        //Check hash
+        if (array_key_exists('HTTP_HASH', $_SERVER) && array_key_exists('HTTP_TIMESTAMP', $_SERVER)) {
+            $httpHash = urldecode($_SERVER['HTTP_HASH']);
+            $this->SendDebug(__FUNCTION__, 'Incoming hash: ' . $httpHash, 0);
+            $calculatedHash = hash('sha256', $data . pack('J', urldecode($_SERVER['HTTP_TIMESTAMP'])) . base64_decode($this->ReadPropertyString('DeviceConfigKey')));
+            $this->SendDebug(__FUNCTION__, 'Calculated hash: ' . $calculatedHash, 0);
+            if ($httpHash != $calculatedHash) {
+                $this->SendDebug(__FUNCTION__, 'Abort, hash values are not the same!', 0);
+                return;
+            }
         }
 
         /*
